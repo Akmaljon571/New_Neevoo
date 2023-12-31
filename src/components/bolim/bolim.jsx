@@ -15,17 +15,17 @@ export const Bolim = () => {
 
   function Search(evt) {
     if (evt.target.value !== "") {
-      GET(`/categories/` + evt.target.value)
+      GET(`/categories?title=` + evt.target.value)
         .then((res) => res.json())
         .then((data) => setCategories(data));
     } else {
-      GET(`/categories/list`)
+      GET(`/categories/`)
         .then((res) => res.json())
         .then((data) => setCategories(data));
     }
   }
   useEffect(() => {
-    GET(`/categories/list`)
+    GET(`/categories/`)
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, []);
@@ -73,7 +73,7 @@ export const Bolim = () => {
                 <li key={e.id} className="item">
                   <img
                     className="main_img"
-                    src={img_url + e.image}
+                    src={img_url + e.file}
                     alt="category_img"
                     width={80}
                     onClick={() => navigate('/bolim/' + e.title)}

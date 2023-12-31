@@ -30,7 +30,7 @@ function Parol() {
   const key = 'updatable'
 
   const retry = () => {
-    POST('/users/parol/', active)
+    POST('/user/parol/', active)
       .then(re => re.json())
       .then(data => {
         if (data.status === 200) {
@@ -68,10 +68,10 @@ function Parol() {
         type: 'loading',
         content: 'Loading...'
       })
-      POST('/users/parol', obj)
+      POST('/user/parol/', obj)
         .then(re => re.json())
         .then(data => {
-          if (data.status === 200) {
+          if (data.message === 'Send Email code') {
             setQayta(true)
             setVaqt(59)
             setActive(obj)
@@ -95,36 +95,45 @@ function Parol() {
   }
 
   const code = () => {
-    const obj = {
-      password: password.current.value,
-      newPassword: password2.current.value
-    }
+    if (password.current.value === password2.current.value) {
+      const obj = {
+        code: inputCode.current?.value?.trim(),
+        new_password: password2.current.value
+      }
 
-    messageApi.open({
-      key,
-      type: 'loading',
-      content: 'Loading...'
-    })
-    POST('/users/parol/email/' + inputCode.current?.value?.trim(), obj)
-      .then(re => re.json())
-      .then(data => {
-        if (data.status === 200) {
-          navigate('/login')
-          messageApi.open({
-            key,
-            type: 'success',
-            content: 'Loaded!',
-            duration: 2
-          })
-        } else {
-          messageApi.open({
-            key,
-            type: 'error',
-            content: 'Kiritilgan kod noto’g’ri!',
-            duration: 2
-          })
-        }
+      messageApi.open({
+        key,
+        type: 'loading',
+        content: 'Loading...'
       })
+      POST('/user/parol/code/', obj)
+        .then(re => re.json())
+        .then(data => {
+          if (data.message === "Password updated successfully") {
+            navigate('/login')
+            messageApi.open({
+              key,
+              type: 'success',
+              content: 'Loaded!',
+              duration: 2
+            })
+          } else {
+            messageApi.open({
+              key,
+              type: 'error',
+              content: 'Kiritilgan kod noto’g’ri!',
+              duration: 2
+            })
+          }
+        })
+    } else {
+      messageApi.open({
+        key,
+        type: 'error',
+        content: 'Kiritilgan kod noto’g’ri!',
+        duration: 2
+      })
+    }
   }
 
   return (
@@ -159,7 +168,7 @@ function Parol() {
             </p>
             <div className='registr_right-email'>
               <div>
-                <input ref={inputCode} type='text' placeholder='12345' />
+                <input ref={inputCode} type='text' placeholder='123456' />
               </div>
             </div>
             <div className='registr_right-password'>

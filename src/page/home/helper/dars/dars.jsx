@@ -11,10 +11,11 @@ function Dars() {
 
 
     useEffect(() => {
-        GET('/history/count')
+        GET('/user/history/count/')
             .then(re => re.json())
             .then(baza => setData(baza))
     }, []);
+
     return (
         <ul className='dars'>
             <li className='dars_item1'>

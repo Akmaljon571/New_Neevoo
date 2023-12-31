@@ -1,4 +1,4 @@
-.contact { 
+.contact {
     &__hero {
         margin-top: 122px;
         margin-bottom: 100px;
@@ -40,6 +40,7 @@
         min-height: 238px;
         background: linear-gradient(268.65deg, #13334C -7.43%, #5782AC 100%);
         border-radius: 10px;
+        cursor: pointer;
     }
 
     &__u__item {
@@ -53,12 +54,12 @@
             font-weight: 600;
             font-size: 18px;
             line-height: 22px;
-            
+
             color: #FFF;
         }
 
         &__location,
-        &__phone, 
+        &__phone,
         &__mail {
             font-weight: 400;
             font-size: 14px;
@@ -74,11 +75,12 @@
 
     &__wrapper {
         margin: 0 auto;
-        background: #FFFFFF;
+        background: #aaaaaa37;
         box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.05);
         border-radius: 10px;
         min-height: 238px;
         max-width: 393px;
+        cursor: pointer;
     }
 
     &__list {
@@ -102,12 +104,12 @@
             font-weight: 600;
             font-size: 18px;
             line-height: 22px;
-            
+
             color: #1E0A25;
         }
 
         &__location,
-        &__phone, 
+        &__phone,
         &__mail {
             font-weight: 400;
             font-size: 14px;
@@ -201,6 +203,7 @@
 
 @media only screen and (max-width: 700px) {
     .contact--main {
+
         &--textarea,
         &--subbtn,
         input {
@@ -211,6 +214,7 @@
 
 @media only screen and (max-width: 450px) {
     .contact--main {
+
         &--textarea,
         &--subbtn,
         input {

@@ -10,7 +10,7 @@ function Card() {
 
 
     useEffect(() => {
-        GET('/users/one', token)
+        GET('/users/profile', token)
             .then(re => re.json())
             .then(data => setUser(data))
     }, [token]);

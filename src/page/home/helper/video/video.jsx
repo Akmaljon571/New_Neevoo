@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { GET } from '../../../../utils/api/get'
 import { useEffect, useState } from 'react'
-import { img_url } from '../../../../context/start'
+import { url } from '../../../../context/start'
 import './video.scss'
 
 function HomeVideo() {
@@ -9,10 +9,11 @@ function HomeVideo() {
   const [course, setCourse] = useState([])
 
   useEffect(() => {
-    GET('/courses')
+    GET('/course/')
       .then(re => re.json())
       .then(data => setCourse(data))
   }, [])
+
   return (
     <div className='home_video'>
       <h2 className='home_video-h2'>Oxirgi yangilangan darsliklar</h2>
@@ -26,7 +27,7 @@ function HomeVideo() {
                 className='home_video-item'
               >
                 <div>
-                  <img src={img_url + e.image} alt='course img' />
+                  <img src={url + e.file} alt='course img' />
                 </div>
                 <i>Barcha darajalari</i>
                 <h3>{e.title}</h3>

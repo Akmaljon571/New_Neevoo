@@ -9,7 +9,7 @@ function HomeCourse() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    GET('/categories/list')
+    GET('/categories')
       .then(re => re.json())
       .then(baza => setCategory(baza))
   }, [])
@@ -24,7 +24,7 @@ function HomeCourse() {
         {category.length
           ? category.map((e, i) => (
             i < 13 ? <li onClick={() => navigate('/bolim/' + e.title)} className='home_course-item' key={e.id}>
-              <img src={img_url + e?.image} alt='' />
+              <img src={img_url + e?.file} alt='' />
               <span>{e.title}</span>
             </li> : null
           ))

@@ -38,12 +38,13 @@ function Login() {
         type: 'loading',
         content: 'Loading...'
       })
-      POST('/users/login', obj)
+      POST('/user/login/', obj)
         .then(re => re.json())
         .then(data => {
-          if (data.status === 201) {
-            setToken(data.token)
-            localStorage.setItem('user_token', JSON.stringify(data.token))
+          if (data.access) {
+            setToken(data.access)
+            localStorage.setItem('access', JSON.stringify(data.access))
+            localStorage.setItem('refresh', JSON.stringify(data.refresh))
             navigate('/bolim')
             messageApi.open({
               key,

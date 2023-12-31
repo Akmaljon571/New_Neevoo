@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react'
 import { POST } from '../../../utils/api/post'
 import { useNavigate } from 'react-router-dom'
-import { host } from '../../../context/start'
 import { message } from 'antd'
 import image from '../../../img/image 27 (1).png'
 import mail from '../../../img/mail.svg'
@@ -33,7 +32,7 @@ function Registr() {
   const key = 'updatable'
 
   const retry = () => {
-    POST('/users/registr', active)
+    POST('/user/register/', active)
       .then(re => re.json())
       .then(data => {
         if (data.status === 200) {
@@ -73,13 +72,19 @@ function Registr() {
           type: 'loading',
           content: 'Loading...'
         })
-        POST('/users/registr', obj)
+        POST('/user/register/', obj)
           .then(re => re.json())
           .then(data => {
-            if (data.status === 200) {
+            if (data.message === 'Send Email code') {
               setQayta(true)
               setVaqt(59)
               setActive(obj)
+              messageApi.open({
+                key,
+                type: 'success',
+                content: 'Send Code!',
+                duration: 2
+              })
             } else {
               messageApi.open({
                 key,
@@ -113,14 +118,13 @@ function Registr() {
       type: 'loading',
       content: 'Loading...'
     })
-    fetch(
-      host + '/users/registr/email/' + inputCode.current?.value?.trim()
-    )
+    POST('/user/register/code/', { code: inputCode.current?.value?.trim() })
       .then(re => re.json())
       .then(data => {
-        if (data.status === 201) {
-          setToken(data.token)
-          localStorage.setItem('user_token', JSON.stringify(data.token))
+        if (data.access) {
+          setToken(data.access)
+          localStorage.setItem('access', JSON.stringify(data.access))
+          localStorage.setItem('refresh', JSON.stringify(data.refresh))
           navigate('/bolim')
           messageApi.open({
             key,
@@ -195,7 +199,7 @@ function Registr() {
             </p>
             <div className='registr_right-email'>
               <div>
-                <input ref={inputCode} type='text' placeholder='12345' />
+                <input ref={inputCode} type='text' placeholder='123456' />
               </div>
             </div>
             {!qayta ? (
