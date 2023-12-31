@@ -72,7 +72,7 @@ const Modal = () => {
   }
 
   useEffect(() => {
-    GET('/categories/list')
+    GET('/categories')
       .then(re => re.json())
       .then(data => setList(data))
   }, [setList])

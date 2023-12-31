@@ -1,7 +1,7 @@
 import { createContext, useState } from 'react'
 
-export const host = 'http://localhost:3003/vi'
-export const img_url = 'https://storage.googleapis.com/course_hunter/'
+export const host = 'http://localhost:8000'
+export const img_url = ''
 export const State = createContext()
 
 export const StatePriveder = ({ children }) => {

@@ -16,7 +16,7 @@ function Search() {
   const onSearch = e => {
     setLoad(true)
     if (e.target.value !== '') {
-      GET('/courses/' + e.target.value.trim())
+      GET('/course?title=' + e.target.value.trim())
         .then(re => re.json())
         .then(data => {
           setList(data)
@@ -78,7 +78,7 @@ function Search() {
               {
                 <img
                   className='header_search--list--suc'
-                  src={img_url + e.image}
+                  src={img_url + e.file}
                   alt='header_search'
                 />
               }{' '}

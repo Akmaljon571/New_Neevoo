@@ -47,7 +47,7 @@ function Header() {
   }
 
   useEffect(() => {
-    GET('/categories/list')
+    GET('/categories/')
       .then(re => re.json())
       .then(data => setList(data))
   }, [setList])
@@ -63,7 +63,7 @@ function Header() {
         width={30}
         style={{ marginBottom: '-10px' }}
         height={30}
-        src={img_url + list[i]?.image}
+        src={img_url + list[i]?.file}
         alt=''
       />
     )
