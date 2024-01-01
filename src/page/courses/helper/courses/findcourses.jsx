@@ -32,6 +32,7 @@ function FindCourses() {
         .then(data => setCourses(data))
     }
   }, [category])
+
   return (
     <>
       <main className='courses_main'>

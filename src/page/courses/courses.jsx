@@ -2,11 +2,11 @@ import FindCourses from "./helper/courses/findcourses"
 import Descrioption from "./helper/descrioption/descrioption"
 
 
-function Courses (){
-    return(
+function Courses() {
+    return (
         <>
-        <Descrioption />
-        <FindCourses />
+            <Descrioption />
+            <FindCourses />
         </>
     )
 }

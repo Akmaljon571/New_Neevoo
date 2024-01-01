@@ -17,12 +17,14 @@ function VideoHelper({ children }) {
       GET(`/video/course/${children}/`, token)
         .then(re => re.json())
         .then(baza => {
-          setVideos(baza.data)
-          setActive(baza.data.length ? baza.status : true)
-          setOne(url + baza.data[0]?.file)
-          if (baza.status && videoRef.current) {
-            videoRef.current.src = url + baza.data[0]?.file;
-            videoRef.current.load();
+          if (baza.data?.length) {
+            setVideos(baza.data)
+            setActive(baza.data.length ? baza.status : true)
+            setOne(url + baza.data[0]?.file)
+            if (baza.status && videoRef.current) {
+              videoRef.current.src = url + baza.data[0]?.file;
+              videoRef.current.load();
+            }
           }
         })
     }

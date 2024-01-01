@@ -1,12 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Courses, Error, History, Home, Login, Registr, Video } from "../page";
-import { Bolim } from "../components/bolim/bolim";
-import Payment from "../components/payment/payment";
-import Parol from "../page/auth/parol/parol";
-import { About } from "../components/about/about";
-import { Contact } from "../components/contact/contact";
-import { Profile } from "../page/profile/profile";
-import Premium from "../components/premium/premium";
+import { About, Bolim, Contact, Courses, Error, History, Home, Login, Parol, Payment, Premium, Profile, Registr, Video } from "../page";
 
 function Routerr() {
   return (
