@@ -15,7 +15,7 @@ export const Bolim = () => {
 
   function Search(evt) {
     if (evt.target.value !== "") {
-      GET(`/categories?title=` + evt.target.value)
+      GET(`/categories/?title=Zeeroo`)
         .then((res) => res.json())
         .then((data) => setCategories(data));
     } else {

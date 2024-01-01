@@ -18,7 +18,7 @@ function FindCourses() {
 
   useEffect(() => {
     const titleCategory = location.pathname.split('/')[2]
-    GET('/categories?title=' + titleCategory)
+    GET('/categories/?title=' + titleCategory)
       .then(res => res.json())
       .then(data => {
         setCategory(data.filter(e => e.title.split(' ').join('') === titleCategory.split('%20').join(''))[0])

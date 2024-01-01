@@ -9,7 +9,7 @@ function HomeCourse() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    GET('/categories')
+    GET('/categories/')
       .then(re => re.json())
       .then(baza => setCategory(baza))
   }, [])
