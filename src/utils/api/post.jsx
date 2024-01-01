@@ -5,8 +5,8 @@ export const POST = (api, body, token = false) => {
         return fetch(host + api, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                authorization: token
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(body)
         })

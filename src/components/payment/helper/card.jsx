@@ -2,20 +2,27 @@ import { useNavigate } from "react-router-dom";
 import { GET } from "../../../utils/api/get";
 import { useEffect, useState } from "react";
 import useStart from "../../../hooks/useStart";
+import { sum } from "../../../utils/func/sum";
 
 function Card() {
     const { token } = useStart()
     const navigate = useNavigate()
     const [user, setUser] = useState();
+    const [premium, setpremium] = useState([]);
 
 
     useEffect(() => {
-        GET('/users/profile', token)
+        GET('/user/profile/', token)
             .then(re => re.json())
             .then(data => setUser(data))
+        GET('/premium/')
+            .then(re => re.json())
+            .then(data => {
+                setpremium(data.slice(0, 4))
+            })
     }, [token]);
 
-    const telegram = (el) => {
+    const telegram = (el, id) => {
         const data = `
             Ma'lumotlar
             %0A
@@ -28,34 +35,19 @@ function Card() {
         const chatId = '1772591765'
 
         fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&parse_mode=html&text=${data}`)
+        navigate(`/premium/${id}`)
     }
 
     return (
         <ul className="payment_card">
-            <li className="payment_item">
-                <span>Oddiy</span>
-                <h2>150 000 so’m</h2>
-                <p>/ 1 oyga</p>
-                <button onClick={(e) => !token ? navigate('/login') : telegram(e.target)}>{token ? 'Kirish' : 'Sign in'}</button>
-            </li>
-            <li className="payment_item">
-                <span>O'rta</span>
-                <h2>250 000 so’m</h2>
-                <p>/ 3 oyga</p>
-                <button onClick={(e) => !token ? navigate('/login') : telegram(e.target)}>{token ? 'Kirish' : 'Sign in'}</button>
-            </li>
-            <li className="payment_item">
-                <span>Yuqori</span>
-                <h2>500 000 so’m</h2>
-                <p>/ 6 oyga</p>
-                <button onClick={(e) => !token ? navigate('/login') : telegram(e.target)}>{token ? 'Kirish' : 'Sign in'}</button>
-            </li>
-            <li className="payment_item">
-                <span>Yillik</span>
-                <h2>800 000 so’m</h2>
-                <p>/ 12 oyga</p>
-                <button onClick={(e) => !token ? navigate('/login') : telegram(e.target)}>{token ? 'Kirish' : 'Sign in'}</button>
-            </li>
+            {premium.length ? premium.map(pre => (
+                <li key={pre.id} className="payment_item">
+                    <span>{pre.title}</span>
+                    <h2>{sum(pre.price)} so’m</h2>
+                    <p>/ {pre.month} oyga</p>
+                    <button onClick={(e) => !token ? navigate('/login') : telegram(e.target, pre.id)}>{token ? 'Sotib olish' : 'Sign in'}</button>
+                </li>
+            )) : null}
         </ul>
     );
 }

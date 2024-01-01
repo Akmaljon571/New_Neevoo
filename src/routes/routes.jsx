@@ -6,6 +6,7 @@ import Parol from "../page/auth/parol/parol";
 import { About } from "../components/about/about";
 import { Contact } from "../components/contact/contact";
 import { Profile } from "../page/profile/profile";
+import Premium from "../components/premium/premium";
 
 function Routerr() {
   return (
@@ -22,6 +23,7 @@ function Routerr() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/history" element={<History />} />
       <Route path="/parol" element={<Parol />} />
+      <Route path="/premium/:id" element={<Premium />} />
       <Route path="/*" element={<Error />} />
     </Routes>
   );
