@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
 
-export const host = 'http://localhost:8000'
-export const url = 'http://localhost:8000'
+export const host = 'https://neevoo.pythonanywhere.com/'
+export const url = 'https://neevoo.pythonanywhere.com/'
 export const img_url = ''
 export const State = createContext()
 
