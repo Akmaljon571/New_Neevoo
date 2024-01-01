@@ -6,30 +6,22 @@ import {
 } from '@ant-design/icons'
 import { useEffect, useState } from 'react'
 import { GET } from '../../../../utils/api/get'
+import { url } from '../../../../context/start'
 import './findcourses.scss'
-import { img_url } from '../../../../context/start'
 
 function FindCourses({ children }) {
   const navigate = useNavigate()
-  const [category, setCategory] = useState({})
   const [courses, setCourses] = useState([])
 
   useEffect(() => {
-    GET('/categories/' + children.category)
-      .then(res => res.json())
-      .then(data => {
-        setCategory(data.filter(e => e.title === children.category)[0])
-      })
-  }, [children])
-  useEffect(() => {
-    if (category?.id) {
-      GET('/courses/bycategory/' + category.id)
+    if (children.category) {
+      GET(`/course/${children.category}/`)
         .then(res => res.json())
         .then(data => {
           setCourses(data.filter(e => e.id !== children.id))
         })
     }
-  }, [category, children])
+  }, [children])
 
   return (
     <>
@@ -42,7 +34,7 @@ function FindCourses({ children }) {
                   <div onClick={() => navigate('/course/' + e?.title)} className='courses_img'>
                     <span className='courses_premium-logo'>Premium</span>
 
-                    <img src={img_url + e?.image} alt='' />
+                    <img src={url + e?.file} alt='' />
                   </div>
 
                   <div className='courses_descrioption'>

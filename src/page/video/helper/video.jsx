@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import useStart from '../../../hooks/useStart'
 import { GET } from '../../../utils/api/get'
-import { img_url } from '../../../context/start'
+import { url } from '../../../context/start'
 import { useNavigate } from 'react-router-dom'
 
 function VideoHelper({ children }) {
@@ -14,14 +14,14 @@ function VideoHelper({ children }) {
 
   useEffect(() => {
     if (children) {
-      GET('/video/by_course/' + children, token)
+      GET(`/video/course/${children}/`, token)
         .then(re => re.json())
-        .then(data => {
-          setVideos(data)
-          setActive(data.length ? data[0]?.video_active : true)
-          setOne(img_url + data[0]?.link)
-          if (data[0]?.video_active) {
-            videoRef.current.src = img_url + data[0]?.link;
+        .then(baza => {
+          setVideos(baza.data)
+          setActive(baza.data.length ? baza.status : true)
+          setOne(url + baza.data[0]?.file)
+          if (baza.status && videoRef.current) {
+            videoRef.current.src = url + baza.data[0]?.file;
             videoRef.current.load();
           }
         })
@@ -29,9 +29,9 @@ function VideoHelper({ children }) {
   }, [children, setVideos, setOne, setActive, token])
 
   const handleClick = (data) => {
-    setOne(img_url + data)
+    setOne(url + data)
     if (active) {
-      videoRef.current.src = img_url + data;
+      videoRef.current.src = url + data;
       videoRef.current.load();
     }
   }
@@ -48,9 +48,10 @@ function VideoHelper({ children }) {
             autoPlay={'autoplay'}
             preload='auto'
             loop
+            controlsList="nodownload"
             className='video_tag'
+            src={one}
           >
-            <source src={one} type='video/mp4' />
           </video>
         ) : (
           <div className='video_premium'>
@@ -67,10 +68,10 @@ function VideoHelper({ children }) {
         {videos.length
           ? videos.map((e, i) => (
             <li
-              onClick={() => handleClick(e?.link)}
+              onClick={() => handleClick(e?.file)}
               key={i}
               className={
-                e?.link === one?.split('/').at(-1)
+                url + e?.file === one
                   ? 'video_item video_active'
                   : 'video_item'
               }

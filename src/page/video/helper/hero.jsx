@@ -2,7 +2,7 @@
 import { useLocation } from 'react-router-dom'
 import { GET } from '../../../utils/api/get'
 import { useEffect, useState } from 'react'
-import { img_url } from '../../../context/start'
+import { url } from '../../../context/start'
 import VideoHelper from './video'
 import FindCourses from './courses/findcourses'
 
@@ -13,9 +13,11 @@ function Hero() {
 
   useEffect(() => {
     const param = location.pathname.split('/')[2].split('%20').join(' ')
-    GET('/courses/' + param)
+    GET(`/course/`)
       .then(re => re.json())
-      .then(data => setCourse(data[0]))
+      .then(data => {
+        setCourse(data.find(e => e.title === param))
+      })
   }, [count, location.pathname])
 
   return (
@@ -28,7 +30,7 @@ function Hero() {
         Mobil ilovalarni loyihalash: Adobe XD va PS da UI, UX va prototiplash
       </p>
       <div className='video_div'>
-        <img className='video_img' src={img_url + course?.image} alt='' />
+        <img className='video_img' src={url + course?.file} alt='url' />
         <div className='video_div-right'>
           <ul className='video_div-list'>
             <li>

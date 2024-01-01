@@ -1,15 +1,16 @@
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { GET } from '../../../../utils/api/get'
+import { img_url } from '../../../../context/start'
 import './descrioption.scss'
 
-function Descrioption () {
+function Descrioption() {
   const [category, setCategory] = useState([])
   const location = useLocation()
 
   useEffect(() => {
     const titleCategory = location.pathname.split('/')[2]
-    GET('/categories/' + titleCategory)
+    GET('/categories?title=' + titleCategory)
       .then(res => res.json())
       .then(data => {
         setCategory(data.filter(e => e.title.split(' ').join('') === titleCategory.split('%20').join('')))
@@ -21,10 +22,10 @@ function Descrioption () {
       {category?.length ? (
         category.map(e => {
           return (
-            <div style={{marginBottom: '100px', marginTop: '32px'}} className='descrioption' key={e?.id}>
+            <div style={{ marginBottom: '100px', marginTop: '32px' }} className='descrioption' key={e?.id}>
               <img
                 className='descrioption_img'
-                src={'https://storage.googleapis.com/course_hunter/' + e?.image}
+                src={img_url + e?.file}
                 alt=''
                 width={'100px'}
                 height={'100px'}

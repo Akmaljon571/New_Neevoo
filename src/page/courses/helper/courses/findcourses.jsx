@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons'
 import { useEffect, useState } from 'react'
 import { GET } from '../../../../utils/api/get'
-import { img_url } from '../../../../context/start'
+import { url } from '../../../../context/start'
 import error from '../../../../img/404.png'
 import './findcourses.scss'
 
@@ -18,7 +18,7 @@ function FindCourses() {
 
   useEffect(() => {
     const titleCategory = location.pathname.split('/')[2]
-    GET('/categories/' + titleCategory)
+    GET('/categories?title=' + titleCategory)
       .then(res => res.json())
       .then(data => {
         setCategory(data.filter(e => e.title.split(' ').join('') === titleCategory.split('%20').join(''))[0])
@@ -27,7 +27,7 @@ function FindCourses() {
 
   useEffect(() => {
     if (category?.id) {
-      GET('/courses/bycategory/' + category.id)
+      GET(`/course/${category.id}/`)
         .then(res => res.json())
         .then(data => setCourses(data))
     }
@@ -43,8 +43,8 @@ function FindCourses() {
                   <span className='courses_premium-logo'>Premium</span>
                   <img
                     src={
-                      img_url +
-                      e?.image
+                      url +
+                      e?.file
                     }
                     alt=''
                   />

@@ -1,7 +1,7 @@
 import { createContext, useState } from 'react'
 
 export const host = 'http://localhost:8000'
-export const url = 'http://localhost:8000/'
+export const url = 'http://localhost:8000'
 export const img_url = ''
 export const State = createContext()
 

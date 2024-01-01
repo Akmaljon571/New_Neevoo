@@ -5,8 +5,8 @@ export const GET = (api, token = false) => {
         return fetch(host + api, {
             method: "GET",
             headers: {
-                "Content-Type": "application/json",
-                authorization: token
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
         })
     } else {
