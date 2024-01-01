@@ -34,7 +34,7 @@ export const StatePriveder = ({ children }) => {
             }
           })
           .catch(error => console.error('Error:', error));
-      }, 1 * 60 * 1000);
+      }, 4 * 60 * 1000);
     }
   }, [token, refresh_token]);
 
