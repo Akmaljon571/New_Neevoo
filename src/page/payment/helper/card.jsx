@@ -18,7 +18,7 @@ function Card() {
         GET('/premium/')
             .then(re => re.json())
             .then(data => {
-                setpremium(data.slice(0, 4))
+                setpremium(data.slice(0, 4).sort((a, b) => a.price - b.price))
             })
     }, [token]);
 
@@ -42,7 +42,8 @@ function Card() {
         <ul className="payment_card">
             {premium.length ? premium.map(pre => (
                 <li key={pre.id} className="payment_item">
-                    <span>{pre.title}</span>
+                    <span>{pre.type_title
+                    }</span>
                     <h2>{sum(pre.price)} so’m</h2>
                     <p>/ {pre.month} oyga</p>
                     <button onClick={(e) => !token ? navigate('/login') : telegram(e.target, pre.id)}>{token ? 'Sotib olish' : 'Sign in'}</button>

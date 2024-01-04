@@ -70,16 +70,16 @@ function Header() {
     result.push(obj)
   }
 
-  const obj = {
+  const boshqa = {
     label: `Boshqalar`,
     icon: (
       <ArrowRightOutlined
         style={{ fontSize: '20px', color: 'blue', margin: '0 5px' }}
       />
     ),
-    key: '1'
+    key: 'bolim'
   }
-  result.push(obj)
+  result.push(boshqa)
 
   const items = [
     {
@@ -104,9 +104,7 @@ function Header() {
   }
 
   const clickMenu = ({ key, domEvent }) => {
-    const typeKey = typeof key == 'number' ? 1 : '1'
-
-    if (key !== typeKey) {
+    if (key !== 'bolim') {
       if (domEvent.target.className === 'ant-menu-item-icon') {
         navigate('/bolim/' + domEvent.target.parentNode.lastChild.textContent)
       } else if (

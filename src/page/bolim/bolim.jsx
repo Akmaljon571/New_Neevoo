@@ -15,9 +15,11 @@ export const Bolim = () => {
 
   function Search(evt) {
     if (evt.target.value !== "") {
-      GET(`/categories/?title=Zeeroo`)
+      GET(`/categories/`)
         .then((res) => res.json())
-        .then((data) => setCategories(data));
+        .then((data) => {
+          setCategories(data.filter(e => e?.title?.toLowerCase()?.includes(evt.target.value.toLowerCase())))
+        });
     } else {
       GET(`/categories/`)
         .then((res) => res.json())
